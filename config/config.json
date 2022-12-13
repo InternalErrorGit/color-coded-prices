@@ -1,0 +1,22 @@
+{
+    "enableDefaultColor": true,
+    "defaultColor": "default",
+
+
+
+    "enable(0-999)": true,
+    "enable(1000-4999)": true,
+    "enable(5000-9999)": true,
+    "enable(10000-49999)": true,
+    "enable(50000-99999)": true,
+    "enable(100000-inf)": true,
+    
+    "color(0-999)": "yellow",
+    "color(1000-4999)": "orange",
+    "color(5000-9999)": "red",
+    "color(10000-49999)": "violet",
+    "color(50000-99999)": "blue",
+    "color(100000-inf)": "black"
+
+
+}
