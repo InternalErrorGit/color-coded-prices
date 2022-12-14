@@ -1,8 +1,9 @@
 {
     "enableDefaultColor": true,
     "defaultColor": "default",
-
-
+    "disableKeys": false,
+    "disableAmmo": false,
+    "pricePerSlot": true,
 
     "enable(0-999)": true,
     "enable(1000-4999)": true,

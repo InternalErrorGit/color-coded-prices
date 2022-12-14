@@ -29,9 +29,18 @@ class BetterBuilds implements IPostDBLoadMod {
                 continue;
             }
 
+            if ((item._parent == "5c99f98d86f7745c314214b3" || item._parent == "5c164d2286f774194c5e69fa")
+                && config.disableKeys) {
+                continue;
+            } else if (item._parent == "5485a8684bdc2da71d8b4567" && config.disableAmmo) {
+                continue;
+            }
+
             if (config.enableDefaultColor) {
                 item._props.BackgroundColor = config.defaultColor;
             }
+
+
 
             if (this.checkPrice("enable(0-999)", price, 0, 999)) {
                 item._props.BackgroundColor = config["color(0-999)"];
@@ -61,7 +70,7 @@ class BetterBuilds implements IPostDBLoadMod {
             if (this.checkPrice("enable(100000-inf)", price, 50000, Number.MAX_SAFE_INTEGER)) {
                 item._props.BackgroundColor = config["color(100000-inf)"];
             }
-            
+
         }
     }
 
@@ -70,8 +79,19 @@ class BetterBuilds implements IPostDBLoadMod {
     }
 
     public getPriceForItem(id: string): number {
+        const db = this.container.resolve<DatabaseServer>("DatabaseServer");
+        const items = db.getTables().templates.items;
         const ragfairPriceService = this.container.resolve<RagfairPriceService>("RagfairPriceService");
-        return ragfairPriceService.getDynamicPriceForItem(id);
+        const price = ragfairPriceService.getDynamicPriceForItem(id);
+
+        if(config.pricePerSlot){
+            const slotCount = items[id]._props.Width * items[id]._props.Height;
+            if(slotCount != 0){
+                return price / slotCount;
+            }
+        }
+
+        return price;
     }
 
 
